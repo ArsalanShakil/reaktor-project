@@ -1,0 +1,152 @@
+/*
+*{
+    background: #E0E0E0;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.sticky-bar {
+    position: fixed;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: white;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0 2px 16px -2px rgba(0,0,0,.2);
+
+}
+.nav{
+    display: flex;
+    justify-content: left;
+    list-style: none;
+
+}
+.nav>li{
+    background: white;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 72px 0 73px;
+    color: rgb(114, 120, 121);
+}
+*/
+
+/*.card {
+    margin: 6px 6px 8px 6px;
+    !*
+    background: white;
+    *!
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    display: inline-flex;
+    width: 95%;
+    text-align: center;
+    !*border-radius: 10px;*!
+}
+.card>tr>th{
+    color: #111111;
+}*/
+/*
+.card>p {
+    background: white;
+    margin-left: 16px;
+    margin-right: 16px;
+
+}
+body{
+    margin: 0;
+}*/
+
+
+/*
+#beanie-data {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#beanie-data td {
+    border: 1px solid white;
+    padding: 8px;
+    background-color: white;
+}
+*/
+
+
+
+
+
+/*
+#testing-api{
+    margin: 0;
+}
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+.table-box
+{
+    margin: 50px auto;
+}
+
+.table-row{
+    display: table;
+    width: 80%;
+    margin: 10px auto;
+    font-family: sans-serif;
+    background: transparent;
+    padding: 12px 0;
+    color: #555;
+    font-size: 13px;
+    box-shadow: 0 1px 4px 0px rgba(0,0,50,0.3);
+}
+.table-head{
+    background: #8665f7;
+    color: #fff;
+    font-weight: 600;
+    position: fixed;
+    padding-left: 5px;
+    left: 9.8%;
+    top: -1.5%;
+    box-shadow: 0px 4px 4px 4px rgba(226, 225, 225, 0.2);
+    border-radius: 4px;
+}
+.table-head>p{
+    color: white;
+}
+.table-head .table-cell{
+    border-right: none;
+}
+.table-cell{
+    display: table-cell;
+    width: 20%;
+    text-align: center;
+    padding: 0;
+    border-right: 1px solid #d6d4d4;
+    vertical-align: middle;
+}
+.first-cell{
+    text-align: left;
+    padding-left: 10px;
+}
+.last-cell{
+    border-right: none;
+}
+p{
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .table-row {
+        font-size: 11px;
+    }
+}
+.table-row:nth-child(even){background-color: #f9f7f7;}
+
+.online-sign{
+    width: 3px;
+    height: 4px;
+}
+
