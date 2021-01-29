@@ -10,30 +10,43 @@ const fetchBeaniesData = async () => {
         })
         .then(data => {
             console.log(data);
+            let manufacturerArray = [];
+            let manufacturersData = {}
+
+            let productIdArray =[]
             const html = data.map(product => {
-            const color = product.color;
+                if (!manufacturerArray.includes(product.manufacturer)){
+                    manufacturerArray.push(product.manufacturer);
+                    productIdArray.push(product.id);
+                }
+
+                if (!manufacturersData.hasOwnProperty(product.manufacturer)) {
+                    manufacturersData[product.manufacturer] = [product.id];
+                } else {
+                    manufacturersData[product.manufacturer].push(product.id);
+                }
+
                 return `<div class="table-row" >
-        <div class="table-cell first-cell">
-            <p>${product.name}</p>
-        </div>
-        <div class="table-cell">
-            <img src="https://img.icons8.com/plasticine/30/000000/beanie.png" alt="type"/><p>${product.type}</p>
-        </div>
-        <div class="table-cell">
-            <img src="https://img.icons8.com/plasticine/20/000000/company.png" alt="company"/><p>${product.manufacturer}</p>
-        </div>
-        <div class="table-cell">
-            <p>${product.color}</p>
-            <hr class="online-sign"/>
-        </div>
-        <div class="table-cell last-cell">
-            <p>${product.id}</p>
-        </div>
-        </div>`
+                    <div class="table-cell first-cell">
+                        <p>${product.name}</p>
+                    </div>
+                    <div class="table-cell">
+                        <img src="https://img.icons8.com/plasticine/20/000000/company.png" alt="company"/><p>${product.manufacturer}</p>
+                    </div>
+                    <div class="table-cell">
+                        <p class="test-code" id=` + product.id +`>loading</p>
+                    </div>
+                    <div class="table-cell">
+                        <p>${product.color}</p>
+                    </div>
+                    <div class="table-cell last-cell">
+                        <p>${product.id}</p>
+                    </div>
+                    </div>`
 
             }).join('');
-            console.log(html);
-            document.querySelector('#beanie-data').insertAdjacentHTML('afterbegin', html);
+            fetchAvailabilityData(manufacturersData);
+            document.querySelector('#beanies-data').insertAdjacentHTML('afterbegin', html);
         })
         .catch(error => {
             console.log(error);
@@ -43,39 +56,83 @@ const fetchBeaniesData = async () => {
 fetchBeaniesData();
 
 
+const fetchAvailabilityData = async (manufacturersData) => {
+
 /*
-const fetchAvailabilityData = async (manufacturerData, productId) => {
+    try {
+        for (let i = 0; i<manufacturerData.length; i++) {
+            const res = await fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturerData[i]);
+            const json = await res.json();
+           console.log(json.response);
+        }
+
+    } catch (e) {
+        console.log("not working",e);
+    }
+   */
+    for (manufacturer in manufacturersData) {
+        fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturer)
+            .then(response => {
+                if (!response.ok) {
+                    throw Error("Error");
+                }
+                return response.json();
+            }).then(data => {
+            console.log(data.response);
+            console.log(typeof manufacturersData[manufacturer]);
+
+            for (productID in manufacturersData[manufacturer]) {
+                console.log('productID ' + productID)
+            }
+
+
+            /*manufacturersData[manufacturer].forEach(function(productID, index) {
+                console.log(document.getElementById(productID));
+            })
+*/
+            // document.getElementById(productID);
+        }).catch(error => {
+            console.log(error);
+        });
+        console.log(manufacturer)
+    }
+
+        /*fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturersData[index])
+            .then(response => {
+                if (!response.ok) {
+                    throw Error("Error");
+                }
+                return response.json();
+            }).then(data => {
+            console.log(data.response);
+
+            // document.getElementById(productID);
+        }).catch(error => {
+            console.log(error);
+        });
 */
 
-/*  .then(response => {
-      if (!response.ok) {
-          throw Error("Error");
-      }
-      return response.json();
-  })
-  .then(data => {
-      console.log("something fishy",data);
-      const html = data.map(manufacturerInfo => {
-           console.log("MANU DATA", manufacturerInfo.id);
-      }).join('');
-      console.log(html);
-      document.querySelector('#testing-api').insertAdjacentHTML('afterbegin', html);
-  })
-  .catch(error => {
-      console.log("something really fishy",error);
-  });*/
-/* try {
-     const res = await fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturerData);
-     const json = await res.json();
-     console.log("FETCH: ", res.body);
 
 
- } catch (e) {
-     console.log("not working",e);
- }
-}*/
+    /*
+        for (let i = 0; i<manufacturerData.length; i++) {
 
+            console.log(i);
 
+            await fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturerData[i])
+                .then(response =>  {
+                    if (!response.ok) {
+                        throw Error("Error");
+                    }
+                    return response.json();
+                }).then(data =>{
+                    console.log(data.response);
 
+                    document.getElementsByClassName("test-code").innerHTML = "hellooooooo"
+                }).catch(error => {
+                    console.log(error);
+                });
 
-
+        }
+    */
+}

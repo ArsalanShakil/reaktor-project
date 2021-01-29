@@ -10,20 +10,32 @@ const fetchMasksData = async () => {
         })
         .then(data => {
             console.log(data);
+            const array = [];
             const html = data.map(product => {
-                const manufacturerData = product.manufacturer;
+                if (!array.includes(product.manufacturer)){
+                    array.push(product.manufacturer);
 
-                return `
-                    <div>
-                    <p><span>Product:</span> ${product.name}</p>
-                    <p><span>Type:</span> ${product.type}</p>
-                    <p><span>Manufacturer:</span> ${product.manufacturer}</p>
-                    <br>
-                    <br>
-                    </div>`
+                }
+                console.log(array.length);
+                return `<div class="table-row" >
+        <div class="table-cell first-cell">
+            <p>${product.name}</p>
+        </div>
+        <div class="table-cell">
+            <img src="https://img.icons8.com/cute-clipart/30/000000/protection-mask--v2.png"/><p>${product.type}</p>
+        </div>
+        <div class="table-cell">
+            <img src="https://img.icons8.com/plasticine/20/000000/company.png" alt="company"/><p>${product.manufacturer}</p>
+        </div>
+        <div class="table-cell">
+            <p>${product.color}</p>
+        </div>
+        <div class="table-cell last-cell">
+            <p>${product.id}</p>
+        </div>
+        </div>`
             }).join('');
-            console.log(html);
-            document.querySelector('#testing-api').insertAdjacentHTML('afterbegin', html);
+            document.querySelector('#facemasks-data').insertAdjacentHTML('afterbegin', html);
         })
         .catch(error => {
             console.log(error);

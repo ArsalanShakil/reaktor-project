@@ -94,13 +94,12 @@ body{
 .table-row{
     display: table;
     width: 80%;
-    margin: 10px auto;
+    margin: 0px auto;
     font-family: sans-serif;
     background: transparent;
     padding: 12px 0;
     color: #555;
     font-size: 13px;
-    box-shadow: 0 1px 4px 0px rgba(0,0,50,0.3);
 }
 .table-head{
     background: #8665f7;
@@ -124,7 +123,7 @@ body{
     width: 20%;
     text-align: center;
     padding: 0;
-    border-right: 1px solid #d6d4d4;
+    border-right: 0.5px solid #d6d4d4;
     vertical-align: middle;
 }
 .first-cell{

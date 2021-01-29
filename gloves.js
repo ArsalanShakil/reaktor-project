@@ -10,20 +10,33 @@ const fetchGlovesData = async () => {
         })
         .then(data => {
             console.log(data);
+            const array = [];
             const html = data.map(product => {
-                const manufacturerData = product.manufacturer;
+                if (!array.includes(product.manufacturer)){
+                    array.push(product.manufacturer);
 
-                return `
-                    <div>
-                    <p>Product: ${product.name}</p>
-                    <p>Type: ${product.type}</p>
-                    <p>Manufacturer: ${product.manufacturer}</p>
-                    <br>
-                    <br>
-                    </div>`
+                }
+                console.log(array.length);
+
+                return `<div class="table-row" >
+        <div class="table-cell first-cell">
+            <p>${product.name}</p>
+        </div>
+        <div class="table-cell">
+            <img src="https://img.icons8.com/ultraviolet/24/000000/christmas-mitten.png"/><p>${product.type}</p>
+        </div>
+        <div class="table-cell">
+            <img src="https://img.icons8.com/plasticine/20/000000/company.png" alt="company"/><p>${product.manufacturer}</p>
+        </div>
+        <div class="table-cell">
+            <p>${product.color}</p>
+        </div>
+        <div class="table-cell last-cell">
+            <p>${product.id}</p>
+        </div>
+        </div>`
             }).join('');
-            console.log(html);
-            document.querySelector('#testing-api').insertAdjacentHTML('afterbegin', html);
+            document.querySelector('#gloves-data').insertAdjacentHTML('afterbegin', html);
         })
         .catch(error => {
             console.log(error);
