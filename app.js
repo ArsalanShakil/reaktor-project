@@ -2,14 +2,14 @@ const fetchBeaniesData = async () => {
 
     await fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/beanies')
         .then(response => {
-            console.log(response)
+            //console.log(response)
             if (!response.ok) {
                 throw Error("Error");
             }
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            //console.log(data);
             let manufacturerArray = [];
             let manufacturersData = {}
 
@@ -26,23 +26,7 @@ const fetchBeaniesData = async () => {
                     manufacturersData[product.manufacturer].push(product.id);
                 }
 
-                return `<div class="table-row" >
-                    <div class="table-cell first-cell">
-                        <p>${product.name}</p>
-                    </div>
-                    <div class="table-cell">
-                        <img src="https://img.icons8.com/plasticine/20/000000/company.png" alt="company"/><p>${product.manufacturer}</p>
-                    </div>
-                    <div class="table-cell">
-                        <p class="test-code" id=` + product.id +`>loading</p>
-                    </div>
-                    <div class="table-cell">
-                        <p>${product.color}</p>
-                    </div>
-                    <div class="table-cell last-cell">
-                        <p>${product.id}</p>
-                    </div>
-                    </div>`
+                return '<div class="table-row" ><div class="table-cell first-cell"><p>'+product.name+'</p></div> <div class="table-cell"><img src="https://img.icons8.com/plasticine/20/000000/company.png" alt="company"/><p>'+product.manufacturer+'</p></div><div class="table-cell"><p class="test-code" id="'+product.manufacturer + '-' + product.id+'">loading</p></div><div class="table-cell"><p>'+product.color+'</p></div><div class="table-cell last-cell"><p>'+product.id+'</p></div></div>'
 
             }).join('');
             fetchAvailabilityData(manufacturersData);
@@ -70,19 +54,25 @@ const fetchAvailabilityData = async (manufacturersData) => {
         console.log("not working",e);
     }
    */
+    //console.log(JSON.stringify(manufacturersData,null,2));
     for (manufacturer in manufacturersData) {
-        fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturer)
+        const currentManufacturer = manufacturer;
+        fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + currentManufacturer)
             .then(response => {
                 if (!response.ok) {
                     throw Error("Error");
+                    console.log('error');
                 }
                 return response.json();
             }).then(data => {
-            console.log(data.response);
-            console.log(typeof manufacturersData[manufacturer]);
+            console.log(JSON.stringify(data.response));
+              console.log('line 75 log',currentManufacturer);
+            //console.log(typeof manufacturersData[manufacturer]);
 
-            for (productID in manufacturersData[manufacturer]) {
-                console.log('productID ' + productID)
+            for (productID in manufacturersData[currentManufacturer]) {
+                //console.log('manu' + manufacturer + ' product ID ' + manufacturersData[manufacturer][productID]);
+
+                document.getElementById(manufacturer + '-' + manufacturersData[currentManufacturer][productID]).innerHTML = 'hello';
             }
 
 
@@ -94,7 +84,7 @@ const fetchAvailabilityData = async (manufacturersData) => {
         }).catch(error => {
             console.log(error);
         });
-        console.log(manufacturer)
+        //console.log(manufacturer)
     }
 
         /*fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + manufacturersData[index])
