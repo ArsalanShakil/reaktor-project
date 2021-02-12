@@ -1,6 +1,6 @@
 const fetchBeaniesData = async () => {
 
-    await fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/beanies')
+    await fetch('https://bad-api-assignment.reaktor.com/v2/products/beanies')
         .then(response => {
             //console.log(response)
             if (!response.ok) {
@@ -59,7 +59,7 @@ const fetchAvailabilityData = async (manufacturersData) => {
     //console.log(JSON.stringify(manufacturersData,null,2));
     for (manufacturer in manufacturersData) {
         const currentManufacturer = manufacturer;
-        fetch('https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/' + currentManufacturer)
+        fetch('https://bad-api-assignment.reaktor.com/v2/availability/' + currentManufacturer)
             .then(response => {
                 if (!response.ok) {
                     throw Error("Error");
