@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/gloves.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Title</title>
 </head>
 <body>
+<nav>
+
+    <ul>
+        <li ><a href="index.html">Home</a></li>
+        <li id="guest-home-page"><a href="beanies.html">Beanies</a></li>
+        <li id="guest-create-post"><a href="facemasks.html">FaceMasks</a></li>
+        <li id="display-username"><a class="active" href="gloves.html" >Gloves</a></li>
+    </ul>
+
+</nav>
 <div class="table-box">
     <div class="table-row table-head">
         <div class="table-cell first-cell">
             <p>Name</p>
         </div>
         <div class="table-cell">
-            <p>Type</p>
+            <p>Manufacturer</p>
         </div>
         <div class="table-cell">
-            <p>Manufacturer</p>
+            <p>Available</p>
         </div>
         <div class="table-cell">
             <p>Colors</p>
@@ -27,6 +38,8 @@
 
     <div id="gloves-data"></div>
 </div>
+
+
 </body>
 <script src="../gloves.js"></script>
 </html>

@@ -33,7 +33,9 @@ const fetchBeaniesData = async () => {
             document.querySelector('#beanies-data').insertAdjacentHTML('afterbegin', html);
         })
         .catch(error => {
-            console.log(error);
+            console.log("LOL",error);
+            //location.reload();
+
         });
 }
 
@@ -65,14 +67,47 @@ const fetchAvailabilityData = async (manufacturersData) => {
                 }
                 return response.json();
             }).then(data => {
-            console.log(JSON.stringify(data.response));
-              console.log('line 75 log',currentManufacturer);
-            //console.log(typeof manufacturersData[manufacturer]);
+            const checkData = (data.response);
+         //   console.log("DATA RESPONSE", JSON.stringify(checkData,null,2));
 
-            for (productID in manufacturersData[currentManufacturer]) {
-                //console.log('manu' + manufacturer + ' product ID ' + manufacturersData[manufacturer][productID]);
+            console.log('line 75 log',currentManufacturer);
+           // console.log("DATAPAYLOAD", checkData[0].DATAPAYLOAD);
 
-                document.getElementById(manufacturer + '-' + manufacturersData[currentManufacturer][productID]).innerHTML = 'hello';
+     //       console.log(manufacturersData[manufacturer]);
+            if(checkData.length > 0){
+                console.log(checkData.length);
+                checkData.forEach(function (product, index){
+                    console.log("index " + index + "checkData " + checkData.length);
+
+                    // console.log('manu ' + manufacturer + ' product ID ' + manufacturersData[manufacturer][productID]);
+                    //sconsole.log("line 80",manufacturersData[manufacturer][productID]);
+                    console.log(currentManufacturer + '-' + product.id.toLowerCase());
+                    let element = document.getElementById(currentManufacturer + '-' + product.id.toLowerCase())
+                    let dataPayLoad = product.DATAPAYLOAD.toString()
+
+
+                    let strippedString = dataPayLoad.replace(/(<([^>]+)>)/gi, "");
+
+
+
+
+
+                    if(element){
+                        document.getElementById(currentManufacturer + '-' + product.id.toLowerCase()).innerHTML = strippedString.slice(6);
+                    }
+                    /*if (strippedString === "  200\n"+"  OUTOFSTOCK") {
+                           if(element){
+                               document.getElementById(currentManufacturer + '-' + product.id.toLowerCase()).innerHTML = 'OUTOFSTOCK';
+                           }
+                    } else if (strippedString === "  200\n"+"  INSTOCK") {
+                        if(element){
+                            document.getElementById(currentManufacturer + '-' + product.id.toLowerCase()).innerHTML = 'INSTOCK';
+                        }
+                    }*/
+                });
+
+            } else{
+                console.log("all unavailable");
             }
 
 
@@ -82,7 +117,8 @@ const fetchAvailabilityData = async (manufacturersData) => {
 */
             // document.getElementById(productID);
         }).catch(error => {
-            console.log(error);
+            console.log("LOOOOOL",error);
+            //location.reload();
         });
         //console.log(manufacturer)
     }
@@ -126,3 +162,4 @@ const fetchAvailabilityData = async (manufacturersData) => {
         }
     */
 }
+
