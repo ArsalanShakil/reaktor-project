@@ -1,3 +1,5 @@
+
+
 const fetchBeaniesData = async () => {
 
     await fetch('https://bad-api-assignment.reaktor.com/v2/products/beanies')
